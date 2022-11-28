@@ -1,12 +1,10 @@
 package BlockCipher;
-
 import Utils.Conversions;
-
 import static BlockCipher.Constants.*;
 import static Utils.Conversions.hextoBin;
 
-public class DES_Operations {
 
+public class DES_Operations {
     // function to perform permutations according to permutation table
     public static String permutation(int[] permutationtable, String permbytes)
     {
@@ -17,19 +15,19 @@ public class DES_Operations {
         resultbytes = Conversions.binToHex(resultbytes);
         return resultbytes;
     }
-//Step 2: Generating 16 keys
+    //Step 2: Generating 16 keys
 //left circular shift bits for key: Step 2
-public static String CircularShift(String input, int numBits)
-{
-    int n = input.length() * 4;
-    int perm[] = new int[n];
-    for (int i = 0; i < n - 1; i++)
-        perm[i] = (i + 2);
-    perm[n - 1] = 1;
-    while (numBits-- > 0)
-        input = permutation(perm, input);
-    return input;
-}
+    public static String CircularShift(String input, int numBits)
+    {
+        int n = input.length() * 4;
+        int perm[] = new int[n];
+        for (int i = 0; i < n - 1; i++)
+            perm[i] = (i + 2);
+        perm[n - 1] = 1;
+        while (numBits-- > 0)
+            input = permutation(perm, input);
+        return input;
+    }
     // preparing 16 keys for 16 rounds : Step 2
     public static String[] getKeys(String key)
     {
@@ -45,7 +43,7 @@ public static String CircularShift(String input, int numBits)
         return keys;
     }
     //perform xor on 2 hexadecimal strings
-   public static String xor(String exp_right, String key)
+    public static String xor(String exp_right, String key)
     {
         long first = Long.parseUnsignedLong(exp_right, 16);
         long second = Long.parseUnsignedLong(key, 16);
@@ -58,7 +56,7 @@ public static String CircularShift(String input, int numBits)
 
 
     // s-box lookup : Step 3
-   public static String sBox(String input_bits)
+    public static String sBox(String input_bits)
     {
         String S_value = "";
         input_bits = hextoBin(input_bits);
@@ -75,7 +73,7 @@ public static String CircularShift(String input, int numBits)
         }
         return S_value;
     }
-   public static String round(String input, String key, int num)
+    public static String round(String input, String key, int num)
     {
         // split subkey
         String left_substring = input.substring(0, 8);
@@ -99,5 +97,4 @@ public static String CircularShift(String input, int numBits)
         // swapper
         return right_substring + left_substring;
     }
-
 }

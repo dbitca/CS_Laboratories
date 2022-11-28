@@ -87,13 +87,13 @@ public class Conversions {
         return binary;
     }
 
-        public static String InverseString(String binaryString){
-            String binaryInverted = "";
-            for (int i = binaryString.length() - 1; i >= 0; i--) {
-                binaryInverted = binaryInverted + binaryString.charAt(i);
-            }
-            return binaryInverted;
+    public static String InverseString(String binaryString){
+        String binaryInverted = "";
+        for (int i = binaryString.length() - 1; i >= 0; i--) {
+            binaryInverted = binaryInverted + binaryString.charAt(i);
         }
+        return binaryInverted;
+    }
     public static ArrayList<Integer> ConvertListToIntegers(String message) {
         String binaryMessage = LettersConverter(message);
         ArrayList<String> myList = new ArrayList<>(Arrays.asList(binaryMessage.split("")));

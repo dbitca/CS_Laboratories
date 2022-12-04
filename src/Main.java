@@ -1,10 +1,9 @@
-import AsymmetricCipher.RSA;
-import AsymmetricCipher.RSA_Utils;
-import BlockCipher.DES;
-import BlockCipher.DES_Operations;
+import HashFunctions.DigitalSignatureCheck;
+
+import java.security.NoSuchAlgorithmException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
       /*  String text = "123456ABCD132536";
         String key = "AABB09182736CCDD";
         DES cipher = new DES();
@@ -16,6 +15,8 @@ public class Main {
         System.out.println("\nPlain Text: "
                 + text.toUpperCase());
     }*/
-       Tests.RunRSACipher();
+      // Tests.RunRSACipher();
+       // Tests.RunSHA();
+       DigitalSignatureCheck.signatureCheck();
     }
 }

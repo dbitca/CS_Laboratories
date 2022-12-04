@@ -12,7 +12,7 @@ public class RSA {
     private BigInteger phi;
     private static BigInteger e;
     private static BigInteger d;
-   private int bitLength = 50;
+   private int bitLength = 1024;
    private Random r;
 
    public RSA() {
@@ -21,7 +21,7 @@ public class RSA {
        p = BigInteger.probablePrime(bitLength, r);
        q = BigInteger.probablePrime(bitLength, r);
        System.out.println("Value of p: " + p);
-       System.out.println("Value of r " + r);
+       System.out.println("Value of q: " + q);
        //Calculating p * q
        N = p.multiply(q);
        //Calculating phi (n) using Big Integer math

@@ -2,6 +2,7 @@ import AsymmetricCipher.RSA;
 import AsymmetricCipher.RSA_Utils;
 import BlockCipher.DES;
 import HashFunctions.SHA;
+import StreamCipher.A5_1Cipher;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -15,6 +16,15 @@ public class Tests {
         text = cipher.decrypt(text, key);
         System.out.println("\nPlain Text: "
                 + text.toUpperCase());
+    }
+
+    public static void RunA5Cipher(){
+        String message = "12345678";
+        String ciphertext = A5_1Cipher.Encrypt(message);
+        String plaintext = A5_1Cipher.Decrypt(ciphertext);
+        System.out.println("Message inserted: " + message);
+        System.out.println("Message encrypted: " + ciphertext);
+        System.out.println("Message decrypted: " + plaintext);
     }
 
     public static void RunRSACipher() throws NoSuchAlgorithmException {

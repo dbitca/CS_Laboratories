@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class SHA {
     public String HashString(String input) throws NoSuchAlgorithmException {
         //message digest workd with MD2, MD5, HashFunctions.SHA-1, HashFunctions.SHA-224, HashFunctions.SHA-256
-        MessageDigest md = MessageDigest.getInstance("HashFunctions.SHA-256");
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] messageDigest = md.digest(input.getBytes());
         BigInteger bigInt = new BigInteger(1, messageDigest);
         return bigInt.toString();
@@ -23,7 +23,6 @@ public class SHA {
         System.out.println("Enter your password ");
         ArrayList<String> passwords = new ArrayList<>();
         ArrayList<String> hashedpasswords = new ArrayList<>();
-        RSA rsa = new RSA();
 
         while (scanner.hasNextLine()) {
             String userPassword = scanner.nextLine();
@@ -34,7 +33,7 @@ public class SHA {
                 if (hashedpasswords.contains(hashedpass) == false)
                     hashedpasswords.add(hashedpass);
                 else
-                    System.out.println("Password already taken, plese enter another password");
+                    System.out.println("Password already taken, please enter another password");
                     passwords.remove(userPassword);
             }
         }

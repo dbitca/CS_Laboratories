@@ -1,43 +1,24 @@
-package Utils;
+package StreamCipher;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Conversions {
-    // hexadecimal to binary conversion
-    public static String hextoBin(String input) {
-        int n = input.length() * 4;
-        input = Long.toBinaryString(
-                Long.parseUnsignedLong(input, 16));
-        while (input.length() < n)
-            input = "0" + input;
-        return input;
-    }
-
-    // binary to hexadecimal conversion
-    public static String binToHex(String input) {
-        int n = (int) input.length() / 4;
-        input = Long.toHexString(
-                Long.parseUnsignedLong(input, 2));
-        while (input.length() < n)
-            input = "0" + input;
-        return input;
-    }
+public class A5_Conversions {
 
     public static String ConvertToCharacters(ArrayList<Integer> message) {
         //initialize list to stock binary values
         ArrayList<Integer> binaryLetter = new ArrayList<>();
-        String encryptedMessageWithLetters = "";
+        StringBuilder encryptedMessageWithLetters = new StringBuilder();
         //iterate the message to split it into blocks of 8 bits
         for (int i = 0; i < (message.size()); i += 8) {
             binaryLetter.clear();
             for (int j = 0; j < 8; j++) {
                 binaryLetter.add(message.get(i + j));
             }
-            encryptedMessageWithLetters += (char) ConvertBinaryToDecimal(binaryLetter);
+            encryptedMessageWithLetters.append((char) ConvertBinaryToDecimal(binaryLetter));
 
         }
-        return encryptedMessageWithLetters;
+        return encryptedMessageWithLetters.toString();
     }
 
     public static int ConvertBinaryToDecimal(ArrayList<Integer> message) {
@@ -53,28 +34,30 @@ public class Conversions {
     }
 
     public static String LettersConverter(String message) {
-        String binaryMessage = "";
+        StringBuilder binaryMessage = new StringBuilder();
         for (Character character : message.toCharArray()) {
             var asciiCode = (int) character;
             //if the character is space, ignore it
             if (asciiCode == 32) continue;
-            var a = DecimalToBinaryConverter(asciiCode);
-            binaryMessage += DecimalToBinaryConverter(asciiCode);
+            DecimalToBinaryConverter(asciiCode);
+            binaryMessage.append(DecimalToBinaryConverter(asciiCode));
         }
-        return binaryMessage;
+        return binaryMessage.toString();
     }
 
     public static String DecimalToBinaryConverter(int asciiCode) {
-        String binary = "";
+        String binary;
         //initialize the value to verify if the binary value of it is of 8 bit length
         int ascii = asciiCode;
 
+        StringBuilder binaryBuilder = new StringBuilder();
         while (asciiCode != 0) {
             int remainder = asciiCode % 2;
             asciiCode = asciiCode / 2;
-            binary = binary + remainder;
+            binaryBuilder.append(remainder);
 
         }
+        binary = String.valueOf(binaryBuilder);
         //if ascii code is less than 64, that means that the value in binary can be stocked with 6 bits
         //--->thus, two 0's are added
         //else if ascii code is between 64 and 128, it has the value in binary of length 7
@@ -99,8 +82,8 @@ public class Conversions {
         ArrayList<String> myList = new ArrayList<>(Arrays.asList(binaryMessage.split("")));
         //System.out.println(myList);
         ArrayList<Integer> myIntegerList = new ArrayList<>();
-        for (int i = 0; i < myList.size(); i++) {
-            myIntegerList.add(Integer.valueOf(myList.get(i)));
+        for (String s : myList) {
+            myIntegerList.add(Integer.valueOf(s));
         }
         //System.out.println(myIntegerList);
         return myIntegerList;

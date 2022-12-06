@@ -42,9 +42,9 @@ public class RSA {
 
     //initiating RSA object
     public RSA (BigInteger e, BigInteger d, BigInteger N){
-        this.e = e;
-        this.d = d;
-        this.N = N;
+        RSA.e = e;
+        RSA.d = d;
+        RSA.N = N;
     }
 
    public static byte[] encrypt (byte[] message){

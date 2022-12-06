@@ -1,18 +1,19 @@
-package Utils;
+package StreamCipher;
 
 import StreamCipher.A5_1Cipher;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
-public class Operations {
+public class A5_Operations {
 
     //Perform XOR operation only of feedback bits
     private static Integer XORFeedbackBits(ArrayList<Integer> register, ArrayList<Integer> feedbackBits) {
-        Integer n = 0;
-        for (int i = 0; i < feedbackBits.size(); i++) {
+        int n = 0;
+        for (Integer feedbackBit : feedbackBits) {
             //count the number of ones
-            if (register.get(feedbackBits.get(i)) == 1)
+            if (register.get(feedbackBit) == 1)
                 n++;
         }
         //perform XOR operation
@@ -25,7 +26,7 @@ public class Operations {
 
     //randomly generate 0's and 1's (used for session key and for frame counter)
     public static ArrayList<Integer> RandomGeneratorOfSignals(int number) {
-        ArrayList<Integer> SessionKey = new ArrayList<Integer>();
+        ArrayList<Integer> SessionKey = new ArrayList<>();
         Random randKeys = new Random();
         for (int i = 0; i < number; i++) {
             int n = randKeys.nextInt(2);
@@ -47,9 +48,9 @@ public class Operations {
 
     //XOR operation between feedback bits and the bit from session key / frame counter
     public static ArrayList<Integer> ListOfSignalsAndFeedbackBitsXored(ArrayList<Integer> register, ArrayList<Integer> feedbackBits, ArrayList<Integer> resultBits) {
-        Integer value = 0;
-        for (int i = 0; i < resultBits.size(); i++) {
-            if (XORFeedbackBits(register, feedbackBits) == resultBits.get(i)) {
+        int value;
+        for (Integer resultBit : resultBits) {
+            if (XORFeedbackBits(register, feedbackBits).equals(resultBit)) {
                 value = 0;
             } else {
                 value = 1;
@@ -86,7 +87,10 @@ public class Operations {
     //Clock the register if the value of the clocking bit and the value of majority are equal
     //Clock --> means to perform xor operation for feedback bits and to shift the register one position in order to add the new computed value
     public static ArrayList<Integer> clock(Integer valueOfMajority, ArrayList<Integer> reg, Integer clockingBit, ArrayList<Integer> feedbackBits) {
-
+        if(Objects.equals(valueOfMajority, reg.get(clockingBit))){
+            int valueToAdd = XORFeedbackBits(reg, feedbackBits);
+            reg = ShiftRegister(reg,valueToAdd );
+        }
         return reg;
     }
 

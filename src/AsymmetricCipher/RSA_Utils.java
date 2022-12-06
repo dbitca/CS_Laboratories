@@ -5,11 +5,11 @@ import java.util.Random;
 
 public class RSA_Utils {
     public static String bytesToString(byte[] encrypted){
-        String encrypt = "";
+        StringBuilder encrypt = new StringBuilder();
         for (byte b: encrypted){
-            encrypt += Byte.toString(b);
+            encrypt.append(b);
         }
-        return encrypt;
+        return encrypt.toString();
     }
 }
 
